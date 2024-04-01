@@ -1,0 +1,27 @@
+.radio-group .form-check {
+    padding-left: 0;
+    width: 100%;
+}
+
+.radio-group .btn-group > .form-check:not(:last-child) > .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.radio-group .btn-group > .form-check:not(:first-child) > .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+}
+
+.radio-group .btn-group > .form-check > label {
+    width: 100%;
+}
+
+.radio-group .btn-group > .form-check > input[type="radio"] {
+    width: calc(100% - 1.25rem);
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
