@@ -4,6 +4,8 @@ import dash_bootstrap_components as dbc
 from pymongo import MongoClient
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY], suppress_callback_exceptions=True)
+server = app.server
+
 app.title = 'Heed'
 
 db = dbc.Row(
@@ -202,4 +204,4 @@ def toggle_navbar_collapse(n, is_open):
     return is_open
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()
