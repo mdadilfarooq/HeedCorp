@@ -70,7 +70,7 @@ form = html.Div(
         ),
         dbc.FormFloating([
             dbc.Input(type="text", id="pubid", placeholder="", maxlength="8"),
-            dbc.Label("Public key"),
+            dbc.Label("Key"),
         ], style={"marginTop": "10px"}),
         dbc.FormFloating([
             dbc.Input(type="text", id="pin", placeholder="", maxlength="4"),
@@ -175,7 +175,7 @@ def upload(active, collection, pubid, pin, name, email, db):
                     if redeem.find_one({"pubid": hashlib.sha256(pubid.encode()).hexdigest(), "pin": hashlib.sha256(pin.encode()).hexdigest()}):
                         details.insert_one({"name": name, "email": email})
                         redeem.delete_one({"pubid": hashlib.sha256(pubid.encode()).hexdigest(), "pin": hashlib.sha256(pin.encode()).hexdigest()})
-                        return "Submit", True, None, None, None, None, False, True, "we will process your request within 10 working days", "success", "REDEMPTION SUCCESSFUL"
+                        return "Submit", True, None, None, None, None, False, True, "we will process your request within ten working days", "success", "REDEMPTION SUCCESSFUL"
         except Exception as e:
             return "Submit", True, None, None, None, None, False, True, str(e), "danger", "ERROR"
         return "Submit", True, None, None, None, None, False, True, "you have entered wrong cerdentials or these credentials have already been used", "info", "FAILED"
