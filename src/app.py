@@ -3,7 +3,7 @@ from dash import Input, Output, State, html
 import dash_bootstrap_components as dbc
 from pymongo import MongoClient
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SKETCHY], suppress_callback_exceptions=True)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.LUMEN], suppress_callback_exceptions=True)
 server = app.server
 
 app.title = 'Heed'
@@ -46,53 +46,57 @@ header = dbc.Navbar(
     ),
     color="dark",
     dark=True,
-    className="rounded"
+    className="rounded",
 )
 
 form = html.Div(
-    [
-        html.Div(
+    children=[html.Div(
             [
-                dbc.RadioItems(
-                    id="collection",
-                    className="btn-group",
-                    inputClassName="btn-check",
-                    labelClassName="btn btn-outline-success",
-                    labelCheckedClassName="active",
-                    options=[
-                        {"label": "Register", "value": "register"},
-                        {"label": "Redeem", "value": "redeem"},
+                html.Div(
+                    [
+                        dbc.RadioItems(
+                            id="collection",
+                            className="btn-group",
+                            inputClassName="btn-check",
+                            labelClassName="btn btn-outline-success",
+                            labelCheckedClassName="active",
+                            options=[
+                                {"label": "Register", "value": "register"},
+                                {"label": "Redeem", "value": "redeem"},
+                            ],
+                            value="register",
+                        ),
                     ],
-                    value="register",
+                    className="d-grid gap-2 radio-group",
                 ),
+                dbc.FormFloating([
+                    dbc.Input(type="text", id="pubid", placeholder="", maxlength="8"),
+                    dbc.Label("Key"),
+                ], style={"marginTop": "10px"}),
+                dbc.FormFloating([
+                    dbc.Input(type="text", id="pin", placeholder="", maxlength="4"),
+                    dbc.Label("Secret PIN"),
+                    dbc.FormText(id='instruction', color="secondary"),
+                ], style={"marginTop": "10px"}),
+                dbc.FormFloating([
+                    dbc.Input(type="text", id="name", placeholder="", maxlength="30"),
+                    dbc.Label("Name"),
+                ], id='name-div', style={"display": "none"}),
+                dbc.FormFloating([
+                    dbc.Input(type="text", id="email", placeholder="", maxlength="30"),
+                    dbc.Label("Email"),
+                ], id='email-div', style={"marginTop": "10px", "display": "none"}),
+                html.Hr(),
+                dbc.Checkbox(
+                    id="checkbox",
+                    value=False,
+                ),
+                dbc.Button("Submit", color="success", disabled=True, id="submit-button", active=True, style={"width": "100%"}),
             ],
-            className="d-grid gap-2 radio-group",
+            className="dynamic-container", style={'marginTop': '20px', "border": "2px solid black", "padding": "10px", "border-radius": "10px"}
         ),
-        dbc.FormFloating([
-            dbc.Input(type="text", id="pubid", placeholder="", maxlength="8"),
-            dbc.Label("Key"),
-        ], style={"marginTop": "10px"}),
-        dbc.FormFloating([
-            dbc.Input(type="text", id="pin", placeholder="", maxlength="4"),
-            dbc.Label("Secret PIN"),
-            dbc.FormText(id='instruction', color="secondary"),
-        ], style={"marginTop": "10px"}),
-        dbc.FormFloating([
-            dbc.Input(type="text", id="name", placeholder="", maxlength="30"),
-            dbc.Label("Name"),
-        ], id='name-div', style={"display": "none"}),
-        dbc.FormFloating([
-            dbc.Input(type="text", id="email", placeholder="", maxlength="30"),
-            dbc.Label("Email"),
-        ], id='email-div', style={"marginTop": "10px", "display": "none"}),
-        html.Hr(),
-        dbc.Checkbox(
-            id="checkbox",
-            value=False,
-        ),
-        dbc.Button("Submit", color="success", disabled=True, id="submit-button", active=True, style={"width": "100%"}),
     ],
-    className="container", style={'width': '50%','marginTop': '20px', "border": "2px solid black", "padding": "10px", "border-radius": "10px"}
+    style={"display": "flex", "justify-content": "center"},
 )
 
 app.layout = html.Div([

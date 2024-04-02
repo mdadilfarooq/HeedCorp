@@ -25,3 +25,13 @@
 ::-webkit-scrollbar {
     width: 0px;
 }
+
+.dynamic-container {
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .dynamic-container {
+        width: 40%;
+    }
+}
